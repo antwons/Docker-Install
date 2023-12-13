@@ -100,22 +100,22 @@ install_portainer_agent() {
 # Main script
 read -p "Do you want to install Portainer? (yes/no): " install_portainer
 
-if [ "$install_portainer" == "yes" ]; then
-    read -p "Do you want to install Portainer-CE or Portainer Agent? (portainer-ce/portainer-agent): " install_type
+    if [ "$install_portainer" == "yes" ]; then
+        read -p "Do you want to install Portainer-CE or Portainer Agent? (portainer-ce/portainer-agent): " install_type
 
-    if [ "$install_type" == "portainer-ce" ]; then
-        install_portainer_ce
-    elif [ "$install_type" == "portainer-agent" ]; then
-        install_portainer_agent
+        if [ "$install_type" == "portainer-ce" ]; then
+            install_portainer_ce
+        elif [ "$install_type" == "portainer-agent" ]; then
+            install_portainer_agent
+        else
+            echo "You obviously don't read or follow directions do you? I'm gone!"
+            sleep 2
+            exit 1
+        fi
     else
-        echo "You obviously don't read or follow directions do you? I'm gone!"
+        echo "No you don't want portainer? OKAY THEN, I GUESS IT'S FINE! Continuing with the script..."
         sleep 2
-        exit 1
     fi
-else
-    echo "No you don't want portainer? OKAY THEN, I GUESS IT'S FINE! Continuing with the script..."
-    sleep 2
-fi
 
 clear 
 sleep 2
