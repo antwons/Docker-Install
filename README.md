@@ -1,6 +1,6 @@
 ## Welcome to our simple Docker Install Script
 
-> <font color:"red">Please note that this script has only been tested with Ubuntu, Debian and Raspberry PI OS 64 BIT at this time </font>
+<font color:"red">Please note that this script has only been tested with Ubuntu, Debian and Raspberry PI OS 64 BIT at this time </font>
 
 ### To begin with our install, copy the following and paste into the terminal of your server! 
 ```
