@@ -1,40 +1,19 @@
 #!/bin/bash
 
-# First we are going to see if the user wants to run as root, or if they are root currently. 
-
 clear
-
-#Fun beginning
-
-echo "."
-sleep 1
-clear
-echo ".."
-sleep 1
-clear
-echo "..."
-sleep 1
-clear
-sleep 1
-echo "Please wait as we hack into the mainframe"
+echo "Welcome to Antwon's Docker install Script!"
 sleep 2
-clear
-echo "Im in!"
+echo 
+echo "In this install script, we are going to install Docker, Docker Compose and it's depencies required to run."
+sleep 2
+echo 
+echo "Here we go!"
 sleep 2
 clear
 
-echo "Hello friends!"
-sleep 2
-clear
-echo "Our name is Server-Boyz"
-sleep 2
-clear
-echo "Please hold while we check to see if you are root"
-sleep 2
-echo
-
+echo "we are first going to check that you are running as root!"
 if [ "$(id -u)" == "0" ]; then
-    echo "Looks like you are already running as root. TSK-TSK Naughty-Naughty! I guess we will proceed with the script..."
+    echo "You are currently running as root, we will proceed!"
     sleep 3
 else
     # Prompt the user to decide whether to elevate to root
@@ -44,8 +23,8 @@ else
         # Elevate to root using sudo
         echo "Thanks for your consent. Consent is paramount to life! We are going to try this again."
         sleep 2
-        sudo chmod +x build-docker.sh
-        sudo ./build-docker.sh  # Run the script again with sudo
+        sudo chmod +x debian-build.sh
+        sudo ./debian-build.sh  # Run the script again with sudo
         exit $?   
     else
         echo "Script aborted. lol. It requires root privileges to proceed."
@@ -59,18 +38,19 @@ sleep 2
 echo "Now we are going to install docker and docker compose!"
 sleep 2
 clear
+
 # Add Docker's official GPG key:
 apt-get update
-apt-get install -y ca-certificates curl gnupg
+apt-get install ca-certificates curl gnupg
 install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 chmod a+r /etc/apt/keyrings/docker.gpg
 
 # Add the repository to Apt sources:
 echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  tee /etc/apt/sources.list.d/docker.list > /dev/null
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 apt-get update
 
 apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -78,6 +58,7 @@ apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin do
 clear
 sleep 2
 
+# Function to install Portainer-CE
 install_portainer_ce() {
     echo "Installing Portainer-CE via Docker..."
     sleep 2
@@ -108,12 +89,12 @@ read -p "Do you want to install Portainer? (yes/no): " install_portainer
         elif [ "$install_type" == "portainer-agent" ]; then
             install_portainer_agent
         else
-            echo "You obviously don't read or follow directions do you? I'm gone!"
+            echo "That was not an option, please re-run the script."
             sleep 2
             exit 1
         fi
     else
-        echo "No you don't want portainer? OKAY THEN, I GUESS IT'S FINE! Continuing with the script..."
+        echo "You've opted to not install Portainer. We will continue."
         sleep 2
     fi
 
@@ -140,5 +121,4 @@ echo "If you installed Portainer-CE, head over to https://$local_ip:9443"
 echo
 echo "If you installed Portainer-Agent, make sure to login to your Main portainer instance and add it as an environment."
 echo 
-echo 'Thank you for using our script! Have a great day! - The Server-Boyz'
-
+echo "Thank you for using our script! Have a great day! - Antwons!"
