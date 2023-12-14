@@ -4,7 +4,7 @@
 
 ### To begin with our install, copy the following and paste into the terminal of your server! 
 ```
-sudo apt install git && sudo git clone https://github.com/antwons/Docker-Install.git && cd scripts && bash menu.sh
+sudo apt install git -y && sudo git clone https://github.com/antwons/Docker-Install.git && cd scripts && bash menu.sh
 ```
 
 ### FAQ's 
