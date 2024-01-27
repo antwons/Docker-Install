@@ -8,6 +8,10 @@ apt install sudo && sudo apt install git -y && sudo git clone https://github.com
 ```
 > The only reason that "apt install sudo" is involved is due to Debian not allowing sudo when running as a root user. We have it install sudo just to accomidate the vast amount of people that are using this script.
 
+> If you are running FEDORA, please run the following script instead!
+```
+yum install sudo && sudo yum install git -y && sudo git clone https://github.com/antwons/Docker-Install.git && cd Docker-Install/scripts && bash menu.sh
+```
 ### FAQ's 
 
 #### *What does this script do exactly?*
