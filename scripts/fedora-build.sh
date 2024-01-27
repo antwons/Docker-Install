@@ -45,7 +45,8 @@ clear
 dnf install -y dnf-plugins-core
 dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 dnf install -y docker-ce docker-ce-cli containerd.io
-systemctl enable docker
+systemctl enable docker.service
+systemctl start docker.service
 
 clear
 sleep 2
